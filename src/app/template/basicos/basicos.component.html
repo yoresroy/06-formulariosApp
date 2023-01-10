@@ -3,7 +3,10 @@
 
 <div class="row">
     <div class="col">
-        <form>
+        <form (ngSubmit)="guardar()" 
+                #miFormulario="ngForm"
+                autocomplete="off"
+                >
             <!--Caompo de producto-->
             <div class="mb-3 row">
                 <label class="col-sm-3 col-form-label">Producto</label>
@@ -11,8 +14,16 @@
                     <input type="text"
                         class="form-control"
                         placeholder="Nombre del producto"
+                        required
+                        minlength="3"
+                        ngModel
+                        name="producto"
                     >
-                    <span class="form-text text-danger">Debe ser de 3 letras</span>
+                    <span class="form-text text-danger"
+                        *ngIf="nombreValido()"        
+                    >    
+                        Debe ser de 3 letras
+                    </span>
                 </div>
             </div>
             <!--Caompo de producto-->
@@ -22,7 +33,16 @@
                     <input type="number"
                         class="form-control"
                         placeholder="Precio del producto"
+                        ngModel
+                        name="precio"
+                        required
+                        min="0"
                     >
+                    <span class="form-text text-danger"
+                        *ngIf="precioValido()"        
+                    >    
+                        El precio debe ser 0 o mayor
+                    </span>
                 </div>
             </div>
 
@@ -33,6 +53,8 @@
                     <input type="number"
                         class="form-control"
                         placeholder="Existencias del producto"
+                        ngModel
+                        name="existencias"
                     >
                 </div>
             </div>
@@ -40,6 +62,7 @@
             <div class="row">
                 <div class="col">
                     <button type="submit"
+                            [disabled]="miFormulario.invalid"
                             class="btn btn-primary float-end">
                         Guardar
                     </button>
@@ -47,5 +70,24 @@
             </div>
 
         </form>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col">
+        
+        <span>Valid</span>
+        <pre> {{ miFormulario.valid }} </pre>
+
+        <span>Pristine</span>
+        <pre> {{ miFormulario.pristine }} </pre>
+
+        <span>Touched</span>
+        <pre> {{ miFormulario.touched }} </pre>
+
+        <pre>
+            {{ miFormulario.value | json }}
+        </pre>
     </div>
 </div>
