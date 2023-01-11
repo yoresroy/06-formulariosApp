@@ -8,7 +8,13 @@ import { NgForm } from '@angular/forms'
 })
 export class BasicosComponent {
 
-  @ViewChild('miFormulario') miFormulario! : NgForm
+  @ViewChild('miFormulario') miFormulario! : NgForm;
+
+  initForm = {
+    producto: 'RXT 4080ti',
+    precio: 10,
+    existencias: 10
+  }
 
   constructor() { }
 
@@ -25,7 +31,12 @@ export class BasicosComponent {
   }
 
   guardar( ){
-    console.log(this.miFormulario);
+    console.log('Posteo correcto');
+    this.miFormulario.resetForm({
+      producto:'Algo',
+      precio:0,
+      existencias:0
+    });
   }
 
 }
