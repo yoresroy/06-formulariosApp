@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-dinamicos',
@@ -16,6 +16,8 @@ export class DinamicosComponent {
       ['FIFA 2022', Validators.required]
     ], Validators.required)
   })
+
+  nuevoFavorito: FormControl = this.formBuilder.control('', Validators.required)
   
   get favoritosArr(){
     return this.miFormulario.get('favoritos') as FormArray;
@@ -27,6 +29,19 @@ export class DinamicosComponent {
   campoEsValido(campo: string){
     return  this.miFormulario.controls[campo].touched
     && this.miFormulario.controls[campo].errors;
+  }
+
+  agregarFavorito(){
+    if ( this.nuevoFavorito.invalid ) { return ;}
+    this.favoritosArr.push( new FormControl( this.nuevoFavorito.value, Validators.required ) );
+    //this.favoritosArr.push(this.formBuilder.control(this.nuevoFavorito.value, Validators.required));
+    this.nuevoFavorito.reset();
+  }
+
+  borrar(i : number){
+    this.favoritosArr.removeAt(i);
+    console.log("BORRAR");
+
   }
 
   guardar(){
