@@ -17,6 +17,7 @@ export class DinamicosComponent {
     ], Validators.required)
   })
 
+
   nuevoFavorito: FormControl = this.formBuilder.control('', Validators.required);
   
   get favoritosArr(){
