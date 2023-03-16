@@ -1,1 +1,103 @@
-<p>registro works!</p>
+<h2>Validaciones Reactivas</h2>
+<hr>
+
+<div class="class">
+    <div class="col">
+        <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="submitFormulario()">
+
+            <!--nombre-->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" 
+                        placeholder="Nombre del usuario"
+                        formControlName="nombre">              
+                    <span class="form-text text-danger"  *ngIf="campoNoValido('nombre')">
+                        Debe ser en formato de nombre y apellido
+                    </span>      
+                </div>
+            </div>
+
+
+            <!--Email-->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control" 
+                    formControlName="email"
+                    placeholder="Email del usuario">                   
+                </div>
+                <span class="form-text text-danger"  *ngIf="campoNoValido('email')">
+                    El correo es obligatorio.
+                </span>    
+            </div>
+
+             <!--Email-->
+             <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Username</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" 
+                    formControlName="username"
+                    placeholder="Nombre código del usuario">                   
+                </div>
+                <span class="form-text text-danger"  *ngIf="campoNoValido('username')">
+                    El Username no puede ser strider.
+                </span>    
+            </div>
+
+            <!--Password-->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Password</label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" 
+                    placeholder="Contraseña código del usuario">                   
+                </div>
+            </div>
+
+
+            <!--Password 2-->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Confirma</label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" 
+                    placeholder="Confirmar la contraseña código del usuario">                   
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-primary float-end" 
+                            type="submit"> 
+                        Crear
+                    </button>
+                </div>
+            </div>
+            
+
+
+        </form>
+    </div>
+</div>
+
+<br>
+
+<h2>
+    Form Valid : {{miFormulario.valid}}
+</h2>
+
+<br>
+
+<h2>
+    Nombre : {{ miFormulario.controls['nombre'].errors | json}}
+</h2>
+
+<br>
+
+<h2>
+    Nombre : {{ miFormulario.controls['email'].errors | json}}
+</h2>
+
+<h2>
+    Nombre : {{ miFormulario.controls['username'].errors | json}}
+</h2>
